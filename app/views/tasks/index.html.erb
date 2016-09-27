@@ -1,0 +1,11 @@
+<h1>Tasks:</h1>
+<ol>
+  <% @all_tasks.each do |key , value| %><li>
+      <h3><%= key[:name] %>:</h3>
+      <ul>
+        <li><strong>Description: </strong><%= key[:description] %></li>
+        <li><strong>Completion Status: </strong><%= key[:completion_status] %></li>
+        <li><strong>Completion Date: </strong><%= key[:completion_date] %></li>
+      </ul>
+  <% end %></li>
+</ol>
