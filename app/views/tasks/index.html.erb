@@ -1,9 +1,11 @@
 <h1>Tasks:</h1>
 <ol>
   <% @all_tasks.each do | item | %><li>
-      <%= link_to "#{item[:name]}", task_path(item[:id]) %></li>
+      <%= link_to "#{item.title}", task_path(item.id) %></li>
       <ul>
-        <li><strong>Completion Status: </strong><%= item[:completion_status] %></li>
+        <li><strong>Completed At: </strong><%= item.completed_at %></li>
       </ul>
   <% end %></li>
 </ol>
+
+<%= link_to "Add a new task", tasks_new_path %>

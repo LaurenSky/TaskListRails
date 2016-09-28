@@ -1,0 +1,19 @@
+<form action="/tasks" method="post" accept-charset="utf-8">
+  <!-- SPECIAL INPUT TO ALLOW RAILS TO USE THIS FORM -->
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+<h1>Add a New Task:</h1>
+  <label for="title">Task Name:</label>
+  <input type="text" name="title" value="" id="title">
+
+  <label for="description">Description:</label>
+  <input type="text" name="description" value="" id="description">
+
+  <label for="completion_at">Completed At:</label>
+  <input type="text" name="completion_at" value="" id="completion_at">
+
+  <input type="submit" value="Submit" <% link_to("Add to Task List", tasks_path,
+          { :class => "return-link",
+            :alt => @alt,
+          } ) %>>
+</form>
