@@ -1,11 +1,9 @@
 <h1>Tasks:</h1>
 <ol>
-  <% @all_tasks.each do |key , value| %><li>
-      <h3><%= key[:name] %>:</h3>
+  <% @all_tasks.each do | item | %><li>
+      <%= link_to "#{item[:name]}", task_path(item[:id]) %></li>
       <ul>
-        <li><strong>Description: </strong><%= key[:description] %></li>
-        <li><strong>Completion Status: </strong><%= key[:completion_status] %></li>
-        <li><strong>Completion Date: </strong><%= key[:completion_date] %></li>
+        <li><strong>Completion Status: </strong><%= item[:completion_status] %></li>
       </ul>
   <% end %></li>
 </ol>

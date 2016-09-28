@@ -1,0 +1,8 @@
+<h3><%= @task[:name] %>:</h3>
+  <ul>
+    <li><strong>Description: </strong><%= @task[:description] %></li>
+    <li><strong>Completion Status: </strong><%= @task[:completion_status] %>
+    <li><strong>Completion Date: </strong><%= @task[:completion_date] %></li>
+  </ul>
+
+<%= link_to "click here", tasks_path %>
