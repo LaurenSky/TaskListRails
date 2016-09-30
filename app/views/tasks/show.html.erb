@@ -1,7 +1,10 @@
-<h3><%= @task.title %>:</h3>
+<h3>
+  <%= @task.title%>
+  <%= link_to "(edit)", task_edit_path(@task.id) %>
+</h3>
   <ul>
     <li><strong>Description: </strong><%= @task.description %></li>
-    <li><strong>Completion Date: </strong><%= @task.completion_at %></li>
+    <li><strong>Completion Date: </strong><%= @task.completed_at %></li>
   </ul>
 
-<%= link_to "click here", tasks_path %>
+<%= link_to "Go Back to All Tasks", tasks_path %>

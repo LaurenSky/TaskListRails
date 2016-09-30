@@ -1,6 +1,6 @@
-<h1>Add a New Task:</h1>
+<h1>Edit a Task</h1>
 
-<%= form_for @task do |f| %>
+<%= form_for @task, method: :patch do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 
@@ -10,7 +10,6 @@
   <%= f.label :completed_at %>
   <%= f.date_field :completed_at %>
 
-  <!-- <%= f.submit %>
-  or if you want to define what the text on the submit button is, do the following: -->
-  <%= f.submit "Create a Task"%>
+  <%= f.submit "Update"%>
+
 <% end %>
