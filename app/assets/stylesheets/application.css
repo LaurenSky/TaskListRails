@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+body {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+header h1 {
+  background-color: #95BF8F;
+  border-bottom: #95BF8F solid 1px;
+  margin-bottom: 3mm;
+  padding: 3mm;
+  color: white;
+  font-family: Papyrus, fantasy;
+  }
+
+footer h4 {
+  background-color: #95BF8F;
+  border-top: #95BF8F solid 1px;
+  margin-top: 2cm;
+  padding: 6mm;
+  font-family: Papyrus, fantasy;
+  color: white;
+}
+
+p {
+  font-size: 10pt;
+}

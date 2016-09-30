@@ -1,11 +1,10 @@
-<h1>Tasks:</h1>
 <%= button_to "Add a new task", tasks_new_path, method: :get %>
 
 <ol>
   <% @all_tasks.each do | item | %><li>
-    <h3>
+    <h4>
       <%= link_to "#{item.title}", task_path(item.id) %>
-    </h3>
+    </h4>
 
     <p>
       Completed:
