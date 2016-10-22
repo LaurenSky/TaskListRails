@@ -1,4 +1,8 @@
 class Task < ActiveRecord::Base
+  belongs_to :user
+
+  validates :user_id, presence: true
+
   def date_view
     @date_completed = created_at.strftime("%m/%d/%Y")
     return @date_completed
@@ -10,6 +14,10 @@ class Task < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def self.by_date
+    order(:created_at)
   end
 
 end

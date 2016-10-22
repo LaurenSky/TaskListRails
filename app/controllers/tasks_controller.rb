@@ -1,16 +1,12 @@
 class TasksController < ApplicationController
+  before_action :find_task, only: [:show, :edit, :update, :destroy, :completed]
+
   def index
-    @all_tasks = Task.all
-
+    @all_tasks = @current_user.tasks.by_date
   end
 
 
-  def show
-    @task = Task.find(params[:id])
-
-    # @task = Integer( params[:id] )
-    # # @task = @all_tasks[ task_id ]
-  end
+  def show; end
 
 
   def new
@@ -20,10 +16,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = session[:user_id]
 
     if @task.save
       # saved successfully
-      redirect_to tasks_path
+      redirect_to tasks_path(@task)
     else
       # did not save
       render :new
@@ -32,13 +29,13 @@ class TasksController < ApplicationController
 
 
   def edit
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
 
   end
 
 
   def update
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
 
     if @task.update(task_params)
       # saved successfully
@@ -51,7 +48,7 @@ class TasksController < ApplicationController
 
 
   def destroy
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
 
     @task.destroy
     redirect_to tasks_path
@@ -59,7 +56,8 @@ class TasksController < ApplicationController
 
 
   def completed
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
+
     if @task.completed_at == nil
       @task.completed_at = Date.today
       @task.save
@@ -72,8 +70,16 @@ class TasksController < ApplicationController
 
   private
 
-    def task_params
-      params.require(:task).permit(:title, :description, :completed_at)
+  def task_params
+    params.require(:task).permit(:title, :description, :completed_at)
+  end
+
+  def find_task
+    begin
+      @task = @current_user.tasks.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render file: "public/404", status: :not_found
     end
+  end
 
 end
