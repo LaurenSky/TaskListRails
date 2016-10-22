@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'tasks#index'
+  root 'welcome#index'
   get 'tasks' => 'tasks#index'
 
   get 'tasks/new' => 'tasks#new'
@@ -13,6 +13,14 @@ Rails.application.routes.draw do
   patch 'tasks/:id/completed' => 'tasks#completed', as: 'task_completed'
 
   delete 'tasks/:id' => 'tasks#destroy'
+
+  # User authentication
+  get "/welcome", to: "welcome#index", as: "welcome"
+  get "/auth/:provider/callback" => "sessions#create"
+  # get "/auth/login", to: "sessions#login", as: "login"
+  get "/sessions/login_failure", to: "sessions#login_failure", as: "login_failure"
+  get "/sessions", to: "sessions#index", as: "sessions"
+  delete "/sessions", to: "sessions#destroy"
 
 
 

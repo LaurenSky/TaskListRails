@@ -3,12 +3,20 @@
 <head>
   <title>TaskListRails</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Josefin+Sans" rel="stylesheet">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
-    <h1>To Do List:</h1>
+    <h1>Gotta Get it Done</h1>
+    <section class="button">
+      <% if session[:user_id] == nil %>
+        <%= link_to "Log In", "/auth/google" %>
+      <% else %>
+        <%= link_to "Log Out", sessions_path, method: :delete %>
+      <% end %>
+    </section>
   </header>
 
   <%= yield %>
