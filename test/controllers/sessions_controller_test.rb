@@ -6,14 +6,15 @@ class SessionsControllerTest < ActionController::TestCase
     get :create,  {provider: "google"}
   end
 
-  test "Attempting to log in without email shouldn't work" do
-    login_a_user
-    request.env['omniauth.auth'][:info].delete(:email)
+  test "Attempting to log in without email should send you to welcome page" do
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google]
+    user = request.env['omniauth.auth'][:info]
+    user.email = nil
 
-    assert_redirected_to welcome_path
-    # assert_no_difference('User.count') do
-    #   get :create,  {provider: "google"}
-    # end
+    assert_no_difference('User.count') do
+      get :create,  {provider: "google"}
+    end
+    assert_template :login_failure
   end
 
   test "Can Create a user" do
@@ -43,8 +44,7 @@ class SessionsControllerTest < ActionController::TestCase
     get :destroy
 
     assert_response :redirect
-    assert_redirected_to welcome_path
+    assert_redirected_to root_path
     assert_nil session[:user_id]
-
   end
 end

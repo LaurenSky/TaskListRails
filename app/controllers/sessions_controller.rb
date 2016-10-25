@@ -15,7 +15,10 @@ class SessionsController < ApplicationController
       # User doesn't match anything in the DB.
       # Attempt to create a new user.
       @user = User.build_from_google(auth_hash)
-      render :creation_failure unless @user.save
+      unless @user.save
+        render :login_failure
+        return
+      end
     end
 
     # Save the user ID in the session
@@ -25,12 +28,11 @@ class SessionsController < ApplicationController
   end
 
   def login_failure
+
   end
 
   def destroy
     session.delete(:user_id)
-    redirect_to welcome_path
+    redirect_to root_path
   end
-
-
 end
